@@ -49,8 +49,10 @@ export default {
     babel({
       exclude: 'node_modules/**',
       babelrc: false,
-      presets: [['env', { modules: false }], 'stage-2'],
-      plugins: ['external-helpers']
+      presets: es ? undefined : [['env', { modules: false }], 'stage-2'],
+      plugins: es
+        ? ['syntax-object-rest-spread', 'transform-flow-strip-types']
+        : ['external-helpers']
     }),
     umd
       ? replace({
